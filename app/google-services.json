@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "348996829520",
+    "project_id": "connectify-2cc64",
+    "storage_bucket": "connectify-2cc64.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:348996829520:android:ee2b4de6a4129eea35ac55",
+        "android_client_info": {
+          "package_name": "com.example.connectify"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "348996829520-aofhlenst8j4df0nop90uvitva0b8r4e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBWF-X81cIdIxOsvFn0FJ9i6JXj9BTFiTQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "348996829520-aofhlenst8j4df0nop90uvitva0b8r4e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
