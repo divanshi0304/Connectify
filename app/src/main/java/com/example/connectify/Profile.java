@@ -13,7 +13,10 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
+import androidx.core.view.MenuItemCompat;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.provider.MediaStore;
 import android.text.TextUtils;
@@ -23,12 +26,16 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.connectify.Adapters.PostsAdapter;
+import com.example.connectify.Models.Posts;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -48,7 +55,9 @@ import com.squareup.picasso.Picasso;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import static android.app.Activity.RESULT_OK;
 import static com.google.firebase.firestore.FirebaseFirestore.getInstance;
@@ -71,6 +80,7 @@ public class Profile extends Fragment {
     ImageView avatarpr, coverpr;
     TextView namepr, emailpr, phonepr;
     FloatingActionButton float_button;
+    RecyclerView rview_posts;
 
     //progress dialog box
     ProgressDialog progressDialog;
@@ -87,6 +97,10 @@ public class Profile extends Fragment {
     //arrays for permissions to be requested
     String camera_per[];
     String storage_per[];
+
+    List<Posts> postsList;
+    PostsAdapter postsAdapter;
+    String uid;
 
     //uri of picked image
     Uri image_uri;
@@ -131,6 +145,7 @@ public class Profile extends Fragment {
         emailpr = view.findViewById(R.id.emailpr);
         phonepr = view.findViewById(R.id.phonepr);
         float_button = view.findViewById(R.id.float_button);
+        rview_posts = view.findViewById(R.id.rview_posts);
 
         //init progress dialog box
         progressDialog = new ProgressDialog(getActivity());
@@ -192,7 +207,111 @@ public class Profile extends Fragment {
             }
         });
 
+        postsList = new ArrayList<>();
+
+        //checking whether the user is signed in or not
+        checkUserStatus();
+
+        //to load all posts of a particular user
+        loadMyPosts();
+
         return view;
+    }
+
+    private void loadMyPosts() {
+
+        //linear layout for recycler view
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+
+        //loading posts from last to show newest post first
+        layoutManager.setStackFromEnd(true);
+        layoutManager.setReverseLayout(true);
+
+        //setting this layout to recycler view
+        rview_posts.setLayoutManager(layoutManager);
+
+        //init posts list
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Posts");
+
+        //query to load posts
+        Query query = reference.orderByChild("uid").equalTo(uid);
+
+        //getting other data using this reference
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                postsList.clear();
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    Posts myPosts = dataSnapshot.getValue(Posts.class);
+                    
+                    //add to list
+                    postsList.add(myPosts);
+                    
+                    //adapter
+                    postsAdapter = new PostsAdapter(getActivity(), postsList);
+                    
+                    //setting this adapter to recycler view
+                    rview_posts.setAdapter(postsAdapter);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+                Toast.makeText(getActivity(), ""+error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+    }
+
+    private void searchMyPosts(String searchtext) {
+
+        //linear layout for recycler view
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+
+        //loading posts from last to show newest post first
+        layoutManager.setStackFromEnd(true);
+        layoutManager.setReverseLayout(true);
+
+        //setting this layout to recycler view
+        rview_posts.setLayoutManager(layoutManager);
+
+        //init posts list
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Posts");
+
+        //query to load posts
+        Query query = reference.orderByChild("uid").equalTo(uid);
+
+        //getting other data using this reference
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                postsList.clear();
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    Posts myPosts = dataSnapshot.getValue(Posts.class);
+
+                    if (myPosts.getpTitle().toLowerCase().contains(searchtext.toLowerCase())
+                    || myPosts.getpDescription().toLowerCase().contains(searchtext.toLowerCase())) {
+
+                        //add to list
+                        postsList.add(myPosts);
+                    }
+
+                    //adapter
+                    postsAdapter = new PostsAdapter(getActivity(), postsList);
+
+                    //setting this adapter to recycler view
+                    rview_posts.setAdapter(postsAdapter);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+                Toast.makeText(getActivity(), ""+error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 
     private boolean checkStoragePermission() {
@@ -326,6 +445,30 @@ public class Profile extends Fragment {
                                     Toast.makeText(getActivity(), "" + e.getMessage(), Toast.LENGTH_SHORT).show();
                                 }
                             });
+
+                    //when user changes name, change it from posts as well
+                    if (key.equals("name")) {
+                        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Posts");
+                        Query query = databaseReference.orderByChild("uid").equalTo(uid);
+                        query.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+
+                                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                                    String child = dataSnapshot.getKey();
+                                    snapshot.getRef().child(child).child("uName").setValue(value);
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+                            }
+                        });
+                    }
+                    else {
+                        Toast.makeText(getActivity(), "Please enter "+key, Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });
@@ -494,6 +637,27 @@ public class Profile extends Fragment {
                                             Toast.makeText(getActivity(), "Error Updating ", Toast.LENGTH_SHORT).show();
                                         }
                                     });
+
+                            //when user changes his name, change it from posts as well
+                            if (profileOrCoverPhoto.equals("image")) {
+                                DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Posts");
+                                Query query = databaseReference.orderByChild("uid").equalTo(uid);
+                                query.addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+
+                                        for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                                            String child = dataSnapshot.getKey();
+                                            snapshot.getRef().child(child).child("uImage").setValue(downloadUri.toString());
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+                                    }
+                                });
+                            }
                         }
                         else {
                             //error occurs
@@ -545,6 +709,8 @@ public class Profile extends Fragment {
         if(user!=null) {
             //Users stays signed in here and email is set of logged in Users
             //myProfileTv.setText(Users.getEmail());
+            //getting signed in user's uid
+            uid = user.getUid();
 
         }
         else {
@@ -556,7 +722,42 @@ public class Profile extends Fragment {
     //inflating menu options
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        //inflating menu
         inflater.inflate(R.menu.menu_main, menu);
+
+        MenuItem item = menu.findItem(R.id.search_button);
+
+        //search view for searching posts of a specific user
+        SearchView searchView = (SearchView) MenuItemCompat.getActionView(item);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+
+            //called when user presses search button
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                if (!TextUtils.isEmpty(query)) {
+                    //search posts
+                    searchMyPosts(query);
+                }
+                else {
+                    loadMyPosts();
+                }
+                return false;
+            }
+
+            //called when user types any letter
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                if (!TextUtils.isEmpty(newText)) {
+                    //search posts
+                    searchMyPosts(newText);
+                }
+                else {
+                    loadMyPosts();
+                }
+                return false;
+            }
+        });
+
         super.onCreateOptionsMenu(menu, inflater);
     }
 

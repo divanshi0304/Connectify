@@ -1,6 +1,7 @@
 package com.example.connectify.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.connectify.Models.Posts;
 import com.example.connectify.R;
+import com.example.connectify.UserProfileActivity;
 import com.squareup.picasso.Picasso;
 
 import org.jetbrains.annotations.NotNull;
@@ -30,8 +32,6 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.MyHolder> {
     List<Posts> postsList;
 
     //constructor
-
-
     public PostsAdapter(Context context, List<Posts> postsList) {
         this.context = context;
         this.postsList = postsList;
@@ -132,6 +132,17 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.MyHolder> {
             }
         });
 
+        holder.profile_layout.setOnClickListener(new View.OnClickListener() {
+
+            //on clicking a user, go to his profile activity using uid
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, UserProfileActivity.class);
+                intent.putExtra("uid", uid);
+                context.startActivity(intent);
+            }
+        });
+
     }
 
     @Override
@@ -147,6 +158,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.MyHolder> {
         TextView u_name, p_title, p_description, p_time;
         Button like_btn, comment_btn, share_btn;
         ImageButton more_btn;
+        LinearLayout profile_layout;
 
         public MyHolder(@NonNull View view) {
 
@@ -163,6 +175,8 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.MyHolder> {
             comment_btn = view.findViewById(R.id.comment_btn);
             share_btn = view.findViewById(R.id.share_btn);
             more_btn = view.findViewById(R.id.more_btn);
+            profile_layout = view.findViewById(R.id.profile_layout);
+
         }
     }
 }

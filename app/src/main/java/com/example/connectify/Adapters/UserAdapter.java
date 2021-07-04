@@ -1,6 +1,8 @@
 package com.example.connectify.Adapters;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,9 +14,12 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.connectify.BuildConfig;
 import com.example.connectify.ChatActivity;
 import com.example.connectify.Models.Users;
 import com.example.connectify.R;
+import com.example.connectify.UserProfileActivity;
+import com.google.firebase.firestore.auth.User;
 import com.squareup.picasso.Picasso;
 
 import org.jetbrains.annotations.NotNull;
@@ -62,13 +67,56 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyHolder> {
         }
 
         //handling item on clicking
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, ChatActivity.class);
-                intent.putExtra("userUid", userUid);
-                context.startActivity(intent);
-            }
+        holder.itemView.setOnClickListener(v -> {
+
+            /*Intent intent = new Intent(context, ChatActivity.class);
+            intent.putExtra("userUid", userUid);
+            context.startActivity(intent);
+*/
+            //showing dialog
+            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+
+            /*builder.setItems(new String[]{"Profile", "Chats"}, (dialog, which) -> {
+
+                    if (which==0) {
+                        //profile is clicked, go to user's posts and data using his uid
+                        Intent intent = new Intent(context, UserProfileActivity.class);
+                        intent.putExtra("uid", userUid);
+                        context.startActivity(intent);
+                    }
+                    if (which==1) {
+                        //chat is clicked
+                        Intent intent = new Intent(context, ChatActivity.class);
+                        intent.putExtra("userUid", userUid);
+                        context.startActivity(intent);
+                    }
+            });
+            builder.create().show();*/
+
+            String[] options = {"Posts", "Chats"};
+
+            builder.setItems(options, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+
+                    //handling dialogs on clicking
+                    if (which == 0) {
+                        //profile is clicked, go to user's posts and data using his uid
+                        Intent intent = new Intent(context, UserProfileActivity.class);
+                        intent.putExtra("uid", userUid);
+                        context.startActivity(intent);
+                    }
+                    else if (which == 1) {
+                        //chat is clicked
+                        Intent intent = new Intent(context, ChatActivity.class);
+                        intent.putExtra("userUid", userUid);
+                        context.startActivity(intent);
+                    }
+                }
+            });
+
+            //create and show dialog
+            builder.create().show();
         });
 
     }

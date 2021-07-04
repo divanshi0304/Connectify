@@ -110,7 +110,7 @@ public class ChatActivity extends AppCompatActivity {
         //getting user's name and picture
         query.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
 
                 //checking until required data is received
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
@@ -223,8 +223,8 @@ public class ChatActivity extends AppCompatActivity {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     Chats chats = dataSnapshot.getValue(Chats.class);
                     assert chats != null;
-                    if (chats.getReceiver().equals(myUid) && chats.getSender().equals(userUid)
-                    || chats.getReceiver().equals(userUid) && chats.getSender().equals(myUid)) {
+                    if (chats.getReceiver().equals(firebaseAuth.getUid()) && chats.getSender().equals(userUid)
+                    || chats.getReceiver().equals(userUid) && chats.getSender().equals(firebaseAuth.getUid())) {
 
                         //add it to the chats list
                         chatsList.add(chats);
@@ -328,8 +328,9 @@ public class ChatActivity extends AppCompatActivity {
 
         getMenuInflater().inflate(R.menu.menu_main, menu);
 
-        //hiding search view, as it is not needed
+        //hiding search view and add posts, as it is not needed
         menu.findItem(R.id.search_button).setVisible(false);
+        menu.findItem(R.id.add_post).setVisible(false);
 
         return super.onCreateOptionsMenu(menu);
     }

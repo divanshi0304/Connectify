@@ -1,5 +1,7 @@
 package com.example.connectify.Models;
 
+import com.google.firebase.database.PropertyName;
+
 public class Chats {
     String message, receiver, sender, timeStamp;
     boolean isSeen;
@@ -47,10 +49,11 @@ public class Chats {
         this.timeStamp = timeStamp;
     }
 
+    @PropertyName("isSeen")
     public boolean isSeen() {
         return isSeen;
     }
-
+    @PropertyName("isSeen")
     public void setSeen(boolean seen) {
         isSeen = seen;
     }

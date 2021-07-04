@@ -172,7 +172,7 @@ public class Home extends Fragment {
         //path of all posts
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Posts");
 
-        //getting all data from this refrence
+        //getting all data from this reference
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NotNull DataSnapshot snapshot) {
@@ -196,7 +196,7 @@ public class Home extends Fragment {
             public void onCancelled(@NotNull DatabaseError databaseError) {
 
                 //if error occurs
-                Toast.makeText(getActivity(), ""+databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity(), ""+databaseError.getMessage(), Toast.LENGTH_SHORT).show();
 
             }
         });
