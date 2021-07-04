@@ -190,6 +190,9 @@ public class UsersFragment extends Fragment {
         //inflating menu
         inflater.inflate(R.menu.menu_main, menu);
 
+        //hiding add post icon from this fragment
+        menu.findItem(R.id.add_post).setVisible(false);
+
         //search view
         MenuItem menuItem = menu.findItem(R.id.search_button);
         SearchView searchView = (SearchView) MenuItemCompat.getActionView(menuItem);

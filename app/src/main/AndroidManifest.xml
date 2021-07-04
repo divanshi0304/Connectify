@@ -16,8 +16,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Connectify">
-        <activity android:name=".ChatActivity"
-            android:theme="@style/Theme.ConnectifyNew"/>
+        <activity android:name=".AddPostActivity"></activity>
+        <activity
+            android:name=".ChatActivity"
+            android:theme="@style/Theme.ConnectifyNew" />
 
         <uses-library
             android:name="org.apache.http.legacy"
