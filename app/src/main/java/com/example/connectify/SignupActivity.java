@@ -96,6 +96,7 @@ public class SignupActivity extends AppCompatActivity {
                                     hashMap.put("phone", "");
                                     hashMap.put("cover", "");
                                     hashMap.put("onlineStatus", "online");
+                                    hashMap.put("typingStatus", "no");
 
                                     //firebase database instance
                                     FirebaseDatabase database = FirebaseDatabase.getInstance();

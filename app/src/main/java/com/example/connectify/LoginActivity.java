@@ -74,13 +74,16 @@ public class LoginActivity extends AppCompatActivity {
                             String email = user.getEmail();
                             String uid = user.getUid();
 
-                            /*//putting online status in hashmap and updating it
-                            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Users");
-                            HashMap<String, Object> hashMap = new HashMap<>();
-                            hashMap.put("onlineStatus", "online");
+                            //firebase database instance
+                            FirebaseDatabase database = FirebaseDatabase.getInstance();
 
-                            //updating value of online status of current user
-                            databaseReference.updateChildren(hashMap);*/
+                            //path to store Users data named "Users"
+                            DatabaseReference reference = database.getReference("Users");
+
+                            //putting data within hashmap in database
+                            reference.child(uid).child("onlineStatus").setValue("online");
+                            reference.child(uid).child("typingStatus").setValue("no");
+
 
                             startActivity(new Intent(LoginActivity.this, DashboardActivity.class));
                         }
