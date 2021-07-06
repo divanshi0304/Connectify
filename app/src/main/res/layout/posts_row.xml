@@ -90,7 +90,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="2k Likes"
-            android:textColor="#FF660C75"/>
+            android:textColor="@color/myFavPurple"/>
 
         <View
             android:layout_width="match_parent"
@@ -109,7 +109,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="LIKE"
-                android:background="@drawable/create_button_style"
+                android:textColor="@color/white"
+                android:background="@drawable/login_button_style"
                 android:drawableLeft="@drawable/ic_like_black" />
 
             <androidx.appcompat.widget.AppCompatButton
@@ -118,7 +119,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="COMMENT"
-                android:background="@drawable/create_button_style"
+                android:textColor="@color/white"
+                android:background="@drawable/login_button_style"
                 android:drawableLeft="@drawable/ic_comment_black"/>
 
             <androidx.appcompat.widget.AppCompatButton
@@ -127,7 +129,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="SHARE"
-                android:background="@drawable/create_button_style"
+                android:textColor="@color/white"
+                android:background="@drawable/login_button_style"
                 android:drawableLeft="@drawable/ic_share_black"/>
 
         </LinearLayout>

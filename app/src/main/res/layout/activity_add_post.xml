@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddPostActivity">
+    tools:context=".AddPostActivity"
+    android:background="@color/myLightRust">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -28,7 +29,7 @@
             android:id="@+id/post_image"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#FF3A0443"
+            android:background="@color/myPurple"
             android:minHeight="200dp"/>
 
         <!--edit text for inputting post description-->

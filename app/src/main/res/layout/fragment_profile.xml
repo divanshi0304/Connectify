@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="#E7D6EA"
+    android:background="@color/myLightRust"
     tools:context=".Profile">
 
     <ScrollView
@@ -20,7 +20,7 @@
                 android:id="@+id/coverpr"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
-                android:background="#70069E"
+                android:background="@color/myOlive"
                 android:scaleType="fitXY">
 
             </ImageView>
@@ -37,7 +37,7 @@
                     android:layout_marginStart="20dp"
                     android:layout_marginLeft="20dp"
                     android:padding="5dp"
-                    android:background="#3A0443"
+                    android:background="@color/myFavPurple"
                     android:layout_width="150dp"
                     android:layout_height="150dp"
                     android:src="@drawable/ic_add_image"/>
@@ -46,7 +46,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:background="#4A0257">
+                    android:background="@color/myFavPurple">
 
                     <TextView
                         android:id="@+id/namepr"
@@ -105,7 +105,7 @@
         android:layout_alignParentBottom="true"
         android:layout_margin="8dp"
         android:layout_alignParentRight="true"
-        app:backgroundTint="#8B2BB5"
+        app:backgroundTint="@color/myOlive"
         android:src="@drawable/ic_edit_white" />
     
 </RelativeLayout>

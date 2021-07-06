@@ -58,7 +58,7 @@ public class SignupActivity extends AppCompatActivity {
         login_button = findViewById(R.id.login_button);
         create_button = findViewById(R.id.create_button);
 
-        login_button.setOnClickListener(new View.OnClickListener() {
+        create_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String email, password, name;
@@ -120,6 +120,14 @@ public class SignupActivity extends AppCompatActivity {
                         }
                     }
                 });
+            }
+        });
+
+        //creating new account
+        login_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(SignupActivity.this, LoginActivity.class));
             }
         });
     }

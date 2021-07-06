@@ -7,4 +7,12 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="myPurple">#4A154B</color>
+    <color name="myBlue">#36C5F0</color>
+    <color name="myRust">#E01E5A</color>
+    <color name="myLightBlue">#DBF0F6</color>
+    <color name="myOlive">#449992</color>
+    <color name="myFavPurple">#814499</color>
+    <color name="myLightRust">#EEE1F3</color>
+
 </resources>

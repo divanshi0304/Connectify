@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:contentPadding="4dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!--image view for profile image-->
+        <ImageView
+            android:id="@+id/imagepr"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/ic_default_user"/>
+
+        <!--image view for showing online/offline status-->
+        <ImageView
+            android:id="@+id/onlineStatuspr"
+            android:layout_width="20dp"
+            android:layout_height="20dp" />
+
+        <!--text view for user name-->
+        <TextView
+            android:id="@+id/namepr"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/imagepr"
+            android:layout_toRightOf="@id/imagepr"
+            android:layout_marginStart="5dp"
+            android:text="User's Name"
+            android:textColor="@color/black"
+            android:textSize="22sp"/>
+
+        <!--text view for user name-->
+        <TextView
+            android:id="@+id/last_messagepr"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/imagepr"
+            android:layout_toRightOf="@id/imagepr"
+            android:layout_below="@id/namepr"
+            android:layout_marginStart="5dp"
+            android:text="Last Message"
+            android:textSize="20sp"
+            android:maxLines="1"/>
+
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

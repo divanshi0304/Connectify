@@ -301,6 +301,40 @@ public class ChatActivity extends AppCompatActivity {
         databaseReference.child("Chats").push().setValue(hashMap);
         //reset edit text after sending message
         message_edit.setText("");
+
+        DatabaseReference chatRef1 = FirebaseDatabase.getInstance().
+                getReference("ChatList").child(myUid).child(userUid);
+
+        chatRef1.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NotNull DataSnapshot snapshot) {
+                if (!snapshot.exists()) {
+                    chatRef1.child("id").setValue(userUid);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NotNull DatabaseError error) {
+
+            }
+        });
+
+        DatabaseReference chatRef2 = FirebaseDatabase.getInstance().
+                getReference("ChatList").child(userUid).child(myUid);
+
+        chatRef2.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NotNull DataSnapshot snapshot) {
+                if (!snapshot.exists()) {
+                    chatRef2.child("id").setValue(myUid);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     @Override

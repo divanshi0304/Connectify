@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/message_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -34,7 +35,7 @@
             android:layout_height="wrap_content"
             android:text="02/07/2021 11:52AM"
             android:textSize="10sp"
-            android:textColor="@color/black"/>
+            android:textColor="#A3000000"/>
 
     </LinearLayout>
 
