@@ -23,6 +23,7 @@ import java.util.List;
 
 public class AChatList extends RecyclerView.Adapter<AChatList.MyHolder> {
 
+    //chat list to be displayed
     Context context;
     List<Users> usersList;
     private HashMap<String, Object> lastMessageMap;
@@ -34,7 +35,6 @@ public class AChatList extends RecyclerView.Adapter<AChatList.MyHolder> {
         lastMessageMap = new HashMap<>();
     }
 
-    @NonNull
     @NotNull
     @Override
     public MyHolder onCreateViewHolder(@NotNull ViewGroup parent, int viewType) {

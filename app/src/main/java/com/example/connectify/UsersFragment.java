@@ -196,7 +196,6 @@ public class UsersFragment extends Fragment {
         //search view
         MenuItem menuItem = menu.findItem(R.id.search_button);
         SearchView searchView = (SearchView) MenuItemCompat.getActionView(menuItem);
-        //searchView.setQueryHint("Search User");
 
         //search listener
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {

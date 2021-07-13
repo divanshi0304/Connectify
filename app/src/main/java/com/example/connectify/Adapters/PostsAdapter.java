@@ -45,6 +45,7 @@ import java.util.Locale;
 
 public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.MyHolder> {
 
+    //post list to be displayed
     Context context;
     List<Posts> postsList;
     String myUid;

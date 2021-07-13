@@ -76,23 +76,6 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyHolder> {
             //showing dialog
             AlertDialog.Builder builder = new AlertDialog.Builder(context);
 
-            /*builder.setItems(new String[]{"Profile", "Chats"}, (dialog, which) -> {
-
-                    if (which==0) {
-                        //profile is clicked, go to user's posts and data using his uid
-                        Intent intent = new Intent(context, UserProfileActivity.class);
-                        intent.putExtra("uid", userUid);
-                        context.startActivity(intent);
-                    }
-                    if (which==1) {
-                        //chat is clicked
-                        Intent intent = new Intent(context, ChatActivity.class);
-                        intent.putExtra("userUid", userUid);
-                        context.startActivity(intent);
-                    }
-            });
-            builder.create().show();*/
-
             String[] options = {"Posts", "Chats"};
 
             builder.setItems(options, new DialogInterface.OnClickListener() {

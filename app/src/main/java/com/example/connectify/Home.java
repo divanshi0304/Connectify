@@ -43,7 +43,9 @@ public class Home extends Fragment {
     //firebase authorization
     FirebaseAuth firebaseAuth;
 
+    //declaring views
     RecyclerView recyclerView;
+
     List<Posts> postsList;
     PostsAdapter postsAdapter;
 

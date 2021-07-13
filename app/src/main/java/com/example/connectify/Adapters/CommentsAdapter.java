@@ -22,9 +22,11 @@ import java.util.Locale;
 
 public class CommentsAdapter extends RecyclerView.Adapter<CommentsAdapter.MyHolder> {
 
+    //comment list to be displayed
     Context context;
     List<Comments> commentsList;
 
+    //constructor
     public CommentsAdapter(Context context, List<Comments> commentsList) {
         this.context = context;
         this.commentsList = commentsList;

@@ -42,7 +42,10 @@ public class ChatList extends Fragment {
 
     //firebase auth
     FirebaseAuth firebaseAuth;
+
+    //declaring views
     RecyclerView chatlist_rview;
+
     List<MChatList> mChatLists;
     AChatList aChatList;
     List<Users> usersList;

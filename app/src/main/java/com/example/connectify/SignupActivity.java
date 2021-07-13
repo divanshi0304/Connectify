@@ -27,11 +27,14 @@ import java.util.HashMap;
 
 public class SignupActivity extends AppCompatActivity {
 
+    //firebase auth
     FirebaseAuth auth;
     FirebaseFirestore database;
 
+    //progress bar
     ProgressDialog dialog;
 
+    //views
     EditText email_box, password_box, name_box;
     Button login_button, create_button;
 
@@ -40,6 +43,7 @@ public class SignupActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
 
+        //dialog showing that registration is processing
         dialog = new ProgressDialog(this);
         dialog.setMessage("Registering User...");
 

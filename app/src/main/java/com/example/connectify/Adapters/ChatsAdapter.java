@@ -44,6 +44,7 @@ public class ChatsAdapter extends RecyclerView.Adapter<ChatsAdapter.MyHolder> {
 
     FirebaseUser firebaseUser;
 
+    //constructor
     public ChatsAdapter(Context context, List<Chats> chatsList, String imageUri) {
         this.context = context;
         this.chatsList = chatsList;

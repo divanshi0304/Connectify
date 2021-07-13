@@ -13,6 +13,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //first screen which appears on opening the application
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {

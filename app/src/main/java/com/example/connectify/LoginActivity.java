@@ -31,10 +31,13 @@ import java.util.HashMap;
 
 public class LoginActivity extends AppCompatActivity {
 
+    //firebase auth
     FirebaseAuth auth;
 
+    //progress bar
     ProgressDialog dialog;
 
+    //declaring views
     EditText email_box, password_box;
     Button login_button, create_button;
     TextView recoverPass;

@@ -109,7 +109,6 @@ public class UserProfileActivity extends AppCompatActivity {
                     }
 
                     //setting cover picture
-                    //setting image
                     try {
                         //if image is received
                         Picasso.get().load(cover).into(coverpr);
@@ -125,14 +124,6 @@ public class UserProfileActivity extends AppCompatActivity {
 
             }
         });
-
-       /* //clicking on floating action button
-        float_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showEditProfileDialog();
-            }
-        });*/
 
         postsList = new ArrayList<>();
 
@@ -299,7 +290,6 @@ public class UserProfileActivity extends AppCompatActivity {
 
         if(user!=null) {
             //Users stays signed in here and email is set of logged in Users
-            //myProfileTv.setText(Users.getEmail());
         }
         else {
             startActivity(new Intent(this, MainActivity.class));
