@@ -4,6 +4,9 @@ public class Comments {
 
     String cId, comment, timeStamp, uid, uEmail, uImage, uName;
 
+    public Comments() {
+    }
+
     public Comments(String cId, String comment, String timeStamp, String uid, String uEmail, String uImage, String uName) {
         this.cId = cId;
         this.comment = comment;

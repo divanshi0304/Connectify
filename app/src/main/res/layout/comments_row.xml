@@ -45,7 +45,8 @@
             android:layout_height="wrap_content"
             android:layout_toEndOf="@id/imagepr"
             android:layout_toRightOf="@+id/imagepr"
-            android:layout_below="@id/commentpr"/>
+            android:layout_below="@id/commentpr"
+            android:text="12/07/2021"/>
 
     </RelativeLayout>
 

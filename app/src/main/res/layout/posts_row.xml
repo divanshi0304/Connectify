@@ -122,33 +122,59 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/like_btn"
-                android:layout_width="wrap_content"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:layout_margin="10dp"
+                style="@style/Create.Connectify"
                 android:text="LIKE"
                 android:textColor="@color/white"
                 android:background="@drawable/login_button_style"
-                android:drawableLeft="@drawable/ic_like_black" />
+                android:drawableLeft="@drawable/ic_like_black"
+                android:drawablePadding="2dip"
+                android:gravity="center"
+                android:singleLine="true"
+                android:paddingLeft="15dip"
+                android:paddingRight="15dip"
+                android:textAlignment="center"
+                android:maxLines="1"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/comment_btn"
-                android:layout_width="wrap_content"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                style="@style/Create.Connectify"
                 android:text="COMMENT"
                 android:textColor="@color/white"
                 android:background="@drawable/login_button_style"
-                android:drawableLeft="@drawable/ic_comment_black"/>
+                android:drawableLeft="@drawable/ic_comment_white"
+                android:drawablePadding="2dip"
+                android:gravity="center"
+                android:singleLine="true"
+                android:paddingLeft="15dip"
+                android:paddingRight="15dip"
+                android:textAlignment="center"
+                android:maxLines="1"/>
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/share_btn"
-                android:layout_width="wrap_content"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                style="@style/Create.Connectify"
                 android:text="SHARE"
                 android:textColor="@color/white"
                 android:background="@drawable/login_button_style"
-                android:drawableLeft="@drawable/ic_share_black"/>
+                android:drawableLeft="@drawable/ic_share_black"
+                android:drawablePadding="2dip"
+                android:gravity="center"
+                android:singleLine="true"
+                android:paddingLeft="15dip"
+                android:paddingRight="15dip"
+                android:textAlignment="center"
+                android:maxLines="1"/>
 
         </LinearLayout>
 

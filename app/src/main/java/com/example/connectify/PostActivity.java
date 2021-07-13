@@ -3,6 +3,8 @@ package com.example.connectify;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -21,6 +23,8 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.connectify.Adapters.CommentsAdapter;
+import com.example.connectify.Models.Comments;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -37,8 +41,10 @@ import com.squareup.picasso.Picasso;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 
 public class PostActivity extends AppCompatActivity {
@@ -58,8 +64,12 @@ public class PostActivity extends AppCompatActivity {
     //to get details about user and post
     String myUid, myEmail, myName, myImage, postId, pLikes, pImage_, userImage, userName, hisUid;
 
+    List<Comments> commentsList;
+    CommentsAdapter commentsAdapter;
+
     //progress bar
     ProgressDialog progressDialog;
+    RecyclerView recyclerView;
 
     boolean processComment = false;
     boolean processLike = false;
@@ -92,6 +102,7 @@ public class PostActivity extends AppCompatActivity {
         shareBtn = findViewById(R.id.share_btn);
         likeBtn = findViewById(R.id.like_btn);
         profileLayout = findViewById(R.id.profile_layout);
+        recyclerView = findViewById(R.id.rview);
 
         commentEt = findViewById(R.id.comment_et);
         cimagePr = findViewById(R.id.c_imagepr);
@@ -108,7 +119,9 @@ public class PostActivity extends AppCompatActivity {
         //setting subtitle of action bar
         actionBar.setSubtitle("Signed-in as: " + myEmail);
         
-        //handling click on send send comment button
+        loadComments();
+        
+        //handling click on send comment button
         sendBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -129,6 +142,42 @@ public class PostActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 showMoreOptions();
+            }
+        });
+    }
+
+    private void loadComments() {
+
+        //linear layout for recycler view
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
+
+        //setting layout to recycler view
+        recyclerView.setLayoutManager(layoutManager);
+
+        //init comments list
+        commentsList = new ArrayList<>();
+
+        //to get comments of a past using its path
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Posts").child(postId).child("Comments");
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                commentsList.clear();
+                for (DataSnapshot dataSnapshot: snapshot.getChildren()) {
+                    Comments comments = dataSnapshot.getValue(Comments.class);
+                    commentsList.add(comments);
+
+                    //setting up adapter
+                    commentsAdapter = new CommentsAdapter(getApplicationContext(), commentsList);
+
+                    //setting adapter
+                    recyclerView.setAdapter(commentsAdapter);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
             }
         });
     }
