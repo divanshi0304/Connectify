@@ -1,3 +1,4 @@
 # Connectify
-First upload (contains chat feature)
-Upload and search post functionalty added
+An android app having frontend in XML and backend using Java and Google Firebase database. 
+It contains chat, video calling and uploading post features. 
+Sign in authentication has been managed using Google Firebase.
