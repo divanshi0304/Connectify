@@ -2,12 +2,12 @@ package com.example.connectify.Models;
 
 public class Posts {
 
-    String uid, uName, uEmail, uImage, pId, pTitle, pDescription, pImage, pTime;
+    String uid, uName, uEmail, uImage, pId, pTitle, pDescription, pImage, pTime, pLikes, pComments;
 
     public Posts() {
     }
 
-    public Posts(String uid, String uName, String uEmail, String uImage, String pId, String pTitle, String pDescription, String pImage, String pTime) {
+    public Posts(String uid, String uName, String uEmail, String uImage, String pId, String pTitle, String pDescription, String pImage, String pTime, String pLikes, String pComments) {
         this.uid = uid;
         this.uName = uName;
         this.uEmail = uEmail;
@@ -17,6 +17,8 @@ public class Posts {
         this.pDescription = pDescription;
         this.pImage = pImage;
         this.pTime = pTime;
+        this.pLikes = pLikes;
+        this.pComments = pComments;
     }
 
     public String getUid() {
@@ -89,5 +91,21 @@ public class Posts {
 
     public void setpTime(String pTime) {
         this.pTime = pTime;
+    }
+
+    public String getpLikes() {
+        return pLikes;
+    }
+
+    public void setpLikes(String pLikes) {
+        this.pLikes = pLikes;
+    }
+
+    public String getpComments() {
+        return pComments;
+    }
+
+    public void setpComments(String pComments) {
+        this.pComments = pComments;
     }
 }

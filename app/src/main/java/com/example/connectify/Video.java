@@ -91,6 +91,8 @@ public class Video extends Fragment {
                 JitsiMeetConferenceOptions options = new JitsiMeetConferenceOptions.Builder()
                         .setRoom(secret_code.getText().toString())
                         .setWelcomePageEnabled(false).build();
+                
+                createlink();
 
                 JitsiMeetActivity.launch(context, options);
 
@@ -98,6 +100,9 @@ public class Video extends Fragment {
         });
         //return inflater.inflate(R.layout.fragment_video, container, false);
         return view;
+    }
+
+    private void createlink() {
     }
 
     private void checkUserStatus() {

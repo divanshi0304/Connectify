@@ -85,12 +85,29 @@
             android:text="Description of post"
             android:textColor="@color/black"/>
 
-        <TextView
-            android:id="@+id/p_likes"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="2k Likes"
-            android:textColor="@color/myFavPurple"/>
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/p_likes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="2k Likes"
+                android:textColor="@color/myFavPurple"/>
+
+            <TextView
+                android:id="@+id/p_comments"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="2k Comments"
+                android:textColor="@color/myFavPurple"
+                android:textAlignment="textEnd"/>
+
+        </LinearLayout>
 
         <View
             android:layout_width="match_parent"

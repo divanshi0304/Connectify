@@ -465,6 +465,39 @@ public class Profile extends Fragment {
 
                             }
                         });
+
+                        //updating name in comments as well
+                        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                                for (DataSnapshot dataSnapshot: snapshot.getChildren()) {
+                                    String child = dataSnapshot.getKey();
+                                    if (snapshot.child(child).hasChild("Comments")) {
+                                        String child1 = "" + snapshot.child(child).getKey();
+                                        Query child2 = FirebaseDatabase.getInstance().getReference("Posts").child(child1).child("Comments").orderByChild("uid").equalTo(uid);
+                                        child2.addValueEventListener(new ValueEventListener() {
+                                            @Override
+                                            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                                                for (DataSnapshot dataSnapshot1: snapshot.getChildren()) {
+                                                    String child = dataSnapshot1.getKey();
+                                                    dataSnapshot1.getRef().child(child).child("uName").setValue(value);
+                                                }
+                                            }
+
+                                            @Override
+                                            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+                                            }
+                                        });
+                                    }
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+                            }
+                        });
                     }
                     else {
                         Toast.makeText(getActivity(), "Please enter "+key, Toast.LENGTH_SHORT).show();
@@ -657,6 +690,40 @@ public class Profile extends Fragment {
 
                                     }
                                 });
+
+                                //update user image in comments as well
+                                //updating name in comments as well
+                                databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                                        for (DataSnapshot dataSnapshot: snapshot.getChildren()) {
+                                            String child = dataSnapshot.getKey();
+                                            if (snapshot.child(child).hasChild("Comments")) {
+                                                String child1 = "" + snapshot.child(child).getKey();
+                                                Query child2 = FirebaseDatabase.getInstance().getReference("Posts").child(child1).child("Comments").orderByChild("uid").equalTo(uid);
+                                                child2.addValueEventListener(new ValueEventListener() {
+                                                    @Override
+                                                    public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                                                        for (DataSnapshot dataSnapshot1: snapshot.getChildren()) {
+                                                            String child = dataSnapshot1.getKey();
+                                                            dataSnapshot1.getRef().child(child).child("uImage").setValue(downloadUri.toString());
+                                                        }
+                                                    }
+
+                                                    @Override
+                                                    public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+                                                    }
+                                                });
+                                            }
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+                                    }
+                                });
                             }
                         }
                         else {
@@ -765,7 +832,7 @@ public class Profile extends Fragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        //get item id
+        //getting item id
         int id = item.getItemId();
         if(id==R.id.logout) {
             firebaseAuth.signOut();

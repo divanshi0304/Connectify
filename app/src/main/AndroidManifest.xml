@@ -16,7 +16,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Connectify">
-        <activity android:name=".UserProfileActivity"></activity>
+        <activity android:name=".PostActivity"></activity>
+        <activity android:name=".UserProfileActivity" />
         <activity android:name=".AddPostActivity" />
         <activity
             android:name=".ChatActivity"
